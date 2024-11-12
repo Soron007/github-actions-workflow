@@ -9,12 +9,22 @@ on:
 
 jobs: 
   hello_world:
+
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/test' || github.ref == 'refs/heads/production'
+  
     steps:
       - name: 'Print hello world'
         run: echo "Hello World"
 
       - name: 'Print current date'
         run:  date 
+
+  any_branch_commit:
+      runs-on: ubuntu-latest
+      if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/test' && github.ref != 'refs/heads/production'
+      steps:
+      - name: 'new commit coming up'
+        run:  'echo new commit from any branch'
 
 
